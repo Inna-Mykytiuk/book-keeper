@@ -1,16 +1,13 @@
-export const App = () => {
+// components/App.js
+import React from 'react';
+import Todo from './Todo/Todo';
+
+const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <Todo />
     </div>
   );
 };
+
+export default App;
