@@ -87,7 +87,7 @@ const Todo = props => {
       <button onClick={handleAddTask}>Add Task</button>
       <button onClick={() => handleFilterTasks('completed')}>Completed</button>
       <button onClick={() => handleFilterTasks('incomplete')}>
-        Incomplete
+        Active
       </button>
       <button onClick={() => handleFilterTasks('all')}>All</button>
       <div>
@@ -133,7 +133,7 @@ const mapStateToProps = state => {
 
   if (filter === 'completed') {
     filteredTasks = filteredTasks.filter(task => task.completed);
-  } else if (filter === 'incomplete') {
+  } else if (filter === 'active') {
     filteredTasks = filteredTasks.filter(task => !task.completed);
   }
 

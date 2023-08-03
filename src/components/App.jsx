@@ -1,13 +1,16 @@
-// components/App.js
-import React from 'react';
-import Todo from './Todo/Todo';
+import { Layout } from "components/Layout/Layout";
+import { AppBar } from "components/AppBar/AppBar";
+import { TaskForm } from "components/TaskForm/TaskForm";
+import { TaskList } from "components/TaskList/TaskList";
+import {SearchForm} from "components/SearchForm/SearchForm";
 
-const App = () => {
+export const App = () => {
   return (
-    <div>
-      <Todo />
-    </div>
+    <Layout>
+      <AppBar />
+      <TaskForm />
+      <TaskList />
+      <SearchForm />
+    </Layout>
   );
 };
-
-export default App;
