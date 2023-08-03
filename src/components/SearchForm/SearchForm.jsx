@@ -16,7 +16,7 @@ export const SearchForm = () => {
       dispatch(setQuery(value));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, query, queryValue]);
+  }, [queryValue]);
 
   // [dispatch, query, queryValue]
 

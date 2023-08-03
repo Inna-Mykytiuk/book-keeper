@@ -25,9 +25,14 @@ export const TaskList = () => {
   // const visibleTasks = getVisibleTasks(tasks, statusFilter);
   const query = useSelector(selectQuery);
 
-  const visibleTasks = getVisibleTasks(tasks, statusFilter).filter((task) =>
-  task.text.toLowerCase().includes(query.trim().toLowerCase())
+//   const visibleTasks = getVisibleTasks(tasks, statusFilter).filter((task) =>
+//   task.text.toLowerCase().includes(query.trim().toLowerCase())
+// );
+
+const visibleTasks = getVisibleTasks(tasks, statusFilter).filter((task) =>
+  task.text && task.text.toLowerCase().includes(query.trim().toLowerCase())
 );
+
   return (
     <Container>
       <List>
