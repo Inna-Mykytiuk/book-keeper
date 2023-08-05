@@ -1,11 +1,11 @@
 //Tasks selectors
 export const getTasks = state => state.tasks;
 
-export const selectTotal = state => state.tasks.total;
+// export const selectTotal = state => state.tasks.total;
 
-export const selectIsLoading = state => state.tasks.isLoading;
+// export const selectIsLoading = state => state.tasks.isLoading;
 
-export const selectError = state => state.tasks.error;
+// export const selectError = state => state.tasks.error;
 
 
 //Filter selectors
