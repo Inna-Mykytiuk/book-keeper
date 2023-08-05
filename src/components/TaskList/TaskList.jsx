@@ -30,7 +30,7 @@ export const TaskList = () => {
 // );
 
 const visibleTasks = getVisibleTasks(tasks, statusFilter).filter((task) =>
-  task.text && task.text.toLowerCase().includes(query.trim().toLowerCase())
+  task.text && task.text.toLowerCase().includes(query?.trim().toLowerCase())
 );
 
   return (
