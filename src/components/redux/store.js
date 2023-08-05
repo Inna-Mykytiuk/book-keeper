@@ -52,7 +52,7 @@
 
 //варіант 2-----------------------------
 
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -65,28 +65,26 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-
 import { tasksReducer } from './tasksSlice';
 import { filtersReducer } from './filterSlice';
 
-const tasksPersistConfig = {
-  key: 'tasks',
+const rootReducer = combineReducers({
+  tasks: tasksReducer,
+  filters: filtersReducer,
+})
+
+const persistConfig = {
+  key: 'root',
   storage,
+  whitelist: ['query', 'tasks'],
 };
 
-const filtersPersistConfig = {
-  key: 'filters',
-  storage,
-  whitelist: ['query'],
-};
+
+const persistTasksReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    tasks: persistReducer(tasksPersistConfig, tasksReducer),
-    filters: persistReducer(filtersPersistConfig, filtersReducer),
-
-  },
-  middleware: getDefaultMiddleware =>
+  reducer: persistTasksReducer,
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
@@ -95,3 +93,30 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+// const tasksPersistConfig = {
+//   key: 'tasks',
+//   storage,
+// };
+
+// const filtersPersistConfig = {
+//   key: 'filters',
+//   storage,
+//   whitelist: ['query'],
+// };
+
+// export const store = configureStore({
+//   reducer: {
+//     tasks: persistReducer(tasksPersistConfig, tasksReducer),
+//     filters: persistReducer(filtersPersistConfig, filtersReducer),
+
+//   },
+//   middleware: getDefaultMiddleware =>
+//     getDefaultMiddleware({
+//       serializableCheck: {
+//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//       },
+//     }),
+// });
+
+// export const persistor = persistStore(store);
