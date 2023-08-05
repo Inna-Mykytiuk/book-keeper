@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 // import { Button } from "components/Button/Button";
 import { addTask } from "../redux/tasksSlice";
-// import css from "./TaskForm.module.css";
 
 export const TaskForm = () => {
   const dispatch = useDispatch();
@@ -9,6 +8,7 @@ export const TaskForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
+    if (form.elements.text.value.trim() === "") return alert("fill in the field");
     dispatch(addTask(form.elements.text.value));
     form.reset();
   };
