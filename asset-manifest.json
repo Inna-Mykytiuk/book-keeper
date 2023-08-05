@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/book-keeper/static/css/main.17654e45.css",
-    "main.js": "/book-keeper/static/js/main.1832c301.js",
+    "main.js": "/book-keeper/static/js/main.a4d837a9.js",
     "index.html": "/book-keeper/index.html",
     "main.17654e45.css.map": "/book-keeper/static/css/main.17654e45.css.map",
-    "main.1832c301.js.map": "/book-keeper/static/js/main.1832c301.js.map"
+    "main.a4d837a9.js.map": "/book-keeper/static/js/main.a4d837a9.js.map"
   },
   "entrypoints": [
     "static/css/main.17654e45.css",
-    "static/js/main.1832c301.js"
+    "static/js/main.a4d837a9.js"
   ]
 }
