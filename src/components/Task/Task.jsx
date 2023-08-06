@@ -24,6 +24,8 @@ export const Task = ({ task }) => {
       {/* <Button type="button" onClick={handleToggle}>
         Toggle
       </Button> */}
+      <Text>{task.category}</Text>
+      <Text>{task.name}</Text>
       <Text>{task.text}</Text>
       <Button type="button" onClick={handleDelete}>
         <MdClose size={24} />
