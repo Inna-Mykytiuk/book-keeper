@@ -11,7 +11,7 @@ export const SearchForm = () => {
   const [queryValue, setQueryValue] = useState(query);
 
   useEffect(() => {
-    const value = queryValue.trim().toLowerCase();
+    const value = queryValue?.trim().toLowerCase();
     if (value !== query) {
       dispatch(setQuery(value));
     }

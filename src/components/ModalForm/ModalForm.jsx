@@ -59,7 +59,7 @@ const ModalForm = ({ onClose, initialText }) => {
     const form = event.target;
     const text = form.elements.text.value; // Get the task text from the form
     const name = form.elements.name.value;
-    if (form.elements.text.value.trim() === '')
+    if (form.elements.text.value?.trim() === '')
       return alert('fill in the field');
     dispatch(addTask(text, name, category));
     form.reset();
