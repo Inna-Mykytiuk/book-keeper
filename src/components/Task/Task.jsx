@@ -1,12 +1,10 @@
-import { useDispatch } from "react-redux";
-import { useState} from 'react'
-// import { MdClose } from "react-icons/md";
-import { LuEdit } from "react-icons/lu";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { LuEdit } from 'react-icons/lu';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Wrapper, Checkbox, Text, Button } from './Task.styled';
-import { deleteTask, toggleCompleted } from "../redux/tasksSlice";
-import ModalForm from "components/ModalForm/ModalForm";
-// import css from "./Task.module.css";
+import { deleteTask, toggleCompleted } from '../redux/tasksSlice';
+import ModalForm from 'components/ModalForm/ModalForm';
 
 export const Task = ({ task }) => {
   // Отримуємо посилання на функцію відправки екшенів
@@ -42,19 +40,22 @@ export const Task = ({ task }) => {
       <Text>{task.category}</Text>
       <Text>{task.name}</Text>
       <Text>{task.text}</Text>
-      {/* <Button type="button" >
-        <LuEdit size={24}/>
-      </Button> */}
 
       <Button type="button" onClick={handleEdit}>
         <LuEdit size={24} />
       </Button>
-      {/* ... Other elements */}
       {isEditing && (
-        <ModalForm onClose={handleCloseEdit} initialText={task.text} initialName={task.name} initialCategory={task.category} task={task} initialDate={task.date}/>
+        <ModalForm
+          onClose={handleCloseEdit}
+          initialText={task.text}
+          initialName={task.name}
+          initialCategory={task.category}
+          task={task}
+          initialDate={task.date}
+        />
       )}
       <Button type="button" onClick={handleDelete}>
-        <RiDeleteBin6Line size={24}/>
+        <RiDeleteBin6Line size={24} />
       </Button>
     </Wrapper>
   );

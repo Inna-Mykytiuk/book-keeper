@@ -1,16 +1,11 @@
-// import { useDispatch } from "react-redux";
-// // import { Button } from "components/Button/Button";
-// import { addTask } from "../redux/tasksSlice";
 import React, { useState } from 'react';
-import ModalForm from "components/ModalForm/ModalForm";
+import ModalForm from 'components/ModalForm/ModalForm';
 
-
-export const TaskForm = ({task, initialName}) => {
-
+export const TaskForm = ({ task, initialName }) => {
   const [showModal, setShowModal] = useState(false);
   const [taskText, setTaskText] = useState(initialName);
 
-  const handleAddTask = (e) => {
+  const handleAddTask = e => {
     e.preventDefault();
     setShowModal(true);
     const form = e.target;
@@ -25,16 +20,16 @@ export const TaskForm = ({task, initialName}) => {
   return (
     <>
       <form onSubmit={handleAddTask}>
-      <input
-        type="text"
-        name="text"
-        placeholder="Enter task text..."
-      />
-      {/* <button type="submit">Add task</button> */}
-      <button type='submit'>Add task</button>
-    </form>
-    {showModal && <ModalForm onClose={handleCloseModal} initialName={taskText} task={task}/>}
+        <input type="text" name="text" placeholder="Enter task text..." />
+        <button type="submit">Add task</button>
+      </form>
+      {showModal && (
+        <ModalForm
+          onClose={handleCloseModal}
+          initialName={taskText}
+          task={task}
+        />
+      )}
     </>
-
   );
 };

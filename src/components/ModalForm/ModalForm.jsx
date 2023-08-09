@@ -15,8 +15,13 @@ import { createPortal } from 'react-dom';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const ModalForm = ({ onClose, initialText, initialName, initialCategory, task }) => {
-
+const ModalForm = ({
+  onClose,
+  initialText,
+  initialName,
+  initialCategory,
+  task,
+}) => {
   const [name, setName] = useState(initialName);
   const [text, setText] = useState('');
   const [date, setDate] = useState(new Date().toISOString().substr(0, 10));
@@ -39,13 +44,16 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
   };
 
   useEffect(() => {
-
     setName(initialName);
     setText(initialText);
     setCategory(initialCategory);
-    setDate(task ? (task.date ? task.date.substr(0, 10) : new Date().toISOString().substr(0, 10)) : new Date().toISOString().substr(0, 10));
-
-
+    setDate(
+      task
+        ? task.date
+          ? task.date.substr(0, 10)
+          : new Date().toISOString().substr(0, 10)
+        : new Date().toISOString().substr(0, 10)
+    );
 
     document.addEventListener('keydown', handleEscapeKey);
     document.addEventListener('click', handleBackdropClick);
@@ -57,18 +65,26 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onClose, initialName]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
     const updatedText = form.elements.text.value;
     const updatedName = form.elements.name.value;
 
-    if (updatedText?.trim() === "") {
-      return alert("fill in the field");
+    if (updatedText?.trim() === '') {
+      return alert('fill in the field');
     }
 
     if (task) {
-      dispatch(updateTask({ id: task.id, text: updatedText, name: updatedName, date, category }));
+      dispatch(
+        updateTask({
+          id: task.id,
+          text: updatedText,
+          name: updatedName,
+          date,
+          category,
+        })
+      );
     } else {
       dispatch(addTask(updatedText, updatedName, date, category));
     }
@@ -77,7 +93,7 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
     onClose();
   };
 
-  const handleDateChange = (event) => {
+  const handleDateChange = event => {
     setDate(event.target.value);
   };
 
@@ -86,7 +102,6 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
       <Backdrop onClick={handleBackdropClick}>
         <ModalContainer>
           <Form onSubmit={handleSubmit}>
-            {/* You can add a date input here if needed */}
             <Label htmlFor="date">Date</Label>
             <input
               type="date"
