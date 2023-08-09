@@ -47,11 +47,11 @@ export const Task = ({ task }) => {
       {isEditing && (
         <ModalForm
           onClose={handleCloseEdit}
+          initialDate={task.date}
           initialText={task.text}
           initialName={task.name}
           initialCategory={task.category}
           task={task}
-          initialDate={task.date}
         />
       )}
       <Button type="button" onClick={handleDelete}>

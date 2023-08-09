@@ -20,11 +20,12 @@ const ModalForm = ({
   initialText,
   initialName,
   initialCategory,
+  initialDate,
   task,
 }) => {
   const [name, setName] = useState(initialName);
   const [text, setText] = useState('');
-  const [date, setDate] = useState(new Date().toISOString().substr(0, 10));
+  const [date, setDate] = useState('');
   const [category, setCategory] = useState(initialCategory);
 
   const dispatch = useDispatch();

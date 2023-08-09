@@ -10,13 +10,13 @@ const tasksSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare(text, name, category) {
+      prepare(text, name, category, date) {
         return {
           payload: {
+            date, // You can set the date here or pass it as an argument to prepare function
             name,
             category,
             text,
-            date: new Date().toISOString(), // You can set the date here or pass it as an argument to prepare function
             id: nanoid(),
             completed: false,
           },
@@ -43,9 +43,9 @@ const tasksSlice = createSlice({
       const { id, name, text, date, category } = action.payload;
       const task = state.find(task => task.id === id);
       if (task) {
+        task.date = date;
         task.name = name;
         task.text = text;
-        task.date = date;
         task.category = category;
       }
     },
@@ -54,15 +54,3 @@ const tasksSlice = createSlice({
 
 export const { addTask, deleteTask, toggleCompleted, updateTask, deleteCompleted } = tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;
-
-
-    // updateTask(state, action) {
-    //   const { id, name, text, date, category } = action.payload;
-    //   const task = state.find(task => task.id === id);
-    //   if (task) {
-    //     task.name = name;
-    //     task.text = text;
-    //     task.date = date;
-    //     task.category = category;
-    //   }
-    // },
