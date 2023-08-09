@@ -1,4 +1,5 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
+import { nanoid } from 'nanoid'
 
 const tasksInitialState = [];
 
@@ -13,7 +14,7 @@ const tasksSlice = createSlice({
       prepare(text, name, category, date) {
         return {
           payload: {
-            date, // You can set the date here or pass it as an argument to prepare function
+            date,
             name,
             category,
             text,

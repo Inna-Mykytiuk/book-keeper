@@ -71,6 +71,7 @@ const ModalForm = ({
     const form = event.target;
     const updatedText = form.elements.text.value;
     const updatedName = form.elements.name.value;
+    const updateCategory = form.elements.category.value;
 
     if (updatedText?.trim() === '') {
       return alert('fill in the field');
@@ -83,20 +84,17 @@ const ModalForm = ({
           text: updatedText,
           name: updatedName,
           date,
-          category,
+          category: updateCategory,
         })
       );
     } else {
-      dispatch(addTask(updatedText, updatedName, date, category));
+      dispatch(addTask(updatedText, updatedName, date, category, updateCategory));
     }
 
     form.reset();
     onClose();
   };
 
-  const handleDateChange = event => {
-    setDate(event.target.value);
-  };
 
   return createPortal(
     <>
@@ -104,11 +102,11 @@ const ModalForm = ({
         <ModalContainer>
           <Form onSubmit={handleSubmit}>
             <Label htmlFor="date">Date</Label>
-            <input
+            <Field
               type="date"
               id="date"
               value={date}
-              onChange={handleDateChange}
+              onChange={e => setDate(e.target.value)}
             />
             <Field
               type="name"
