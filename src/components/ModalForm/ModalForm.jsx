@@ -19,7 +19,7 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
 
   const [name, setName] = useState(initialName);
   const [text, setText] = useState('');
-  // const [date, setDate] = useState(new Date().toISOString());
+  const [date, setDate] = useState(new Date().toISOString().substr(0, 10));
   const [category, setCategory] = useState(initialCategory);
 
   const dispatch = useDispatch();
@@ -43,6 +43,8 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
     setName(initialName);
     setText(initialText);
     setCategory(initialCategory);
+    setDate(task ? (task.date ? task.date.substr(0, 10) : new Date().toISOString().substr(0, 10)) : new Date().toISOString().substr(0, 10));
+
 
 
     document.addEventListener('keydown', handleEscapeKey);
@@ -53,7 +55,7 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
       document.removeEventListener('click', handleBackdropClick);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onClose, initialText]);
+  }, [onClose, initialName]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,22 +68,32 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
     }
 
     if (task) {
-      dispatch(updateTask({ id: task.id, text: updatedText, name: updatedName, category }));
+      dispatch(updateTask({ id: task.id, text: updatedText, name: updatedName, date, category }));
     } else {
-      dispatch(addTask(updatedText, updatedName, category));
+      dispatch(addTask(updatedText, updatedName, date, category));
     }
 
     form.reset();
     onClose();
   };
 
-
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
 
   return createPortal(
     <>
       <Backdrop onClick={handleBackdropClick}>
         <ModalContainer>
           <Form onSubmit={handleSubmit}>
+            {/* You can add a date input here if needed */}
+            <Label htmlFor="date">Date</Label>
+            <input
+              type="date"
+              id="date"
+              value={date}
+              onChange={handleDateChange}
+            />
             <Field
               type="name"
               name="name"
@@ -96,7 +108,6 @@ const ModalForm = ({ onClose, initialText, initialName, initialCategory, task })
               name="text"
               onChange={e => setText(e.target.value)}
             />
-            {/* You can add a date input here if needed */}
 
             <>
               <Label htmlFor="category">Category</Label>

@@ -38,6 +38,7 @@ export const Task = ({ task }) => {
       {/* <Button type="button" onClick={handleToggle}>
         Toggle
       </Button> */}
+      <Text>{task.date}</Text>
       <Text>{task.category}</Text>
       <Text>{task.name}</Text>
       <Text>{task.text}</Text>
@@ -50,7 +51,7 @@ export const Task = ({ task }) => {
       </Button>
       {/* ... Other elements */}
       {isEditing && (
-        <ModalForm onClose={handleCloseEdit} initialText={task.text} initialName={task.name} initialCategory={task.category} task={task}/>
+        <ModalForm onClose={handleCloseEdit} initialText={task.text} initialName={task.name} initialCategory={task.category} task={task} initialDate={task.date}/>
       )}
       <Button type="button" onClick={handleDelete}>
         <RiDeleteBin6Line size={24}/>

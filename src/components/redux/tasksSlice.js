@@ -16,7 +16,7 @@ const tasksSlice = createSlice({
             name,
             category,
             text,
-            // date: new Date().toISOString(), // You can set the date here or pass it as an argument to prepare function
+            date: new Date().toISOString(), // You can set the date here or pass it as an argument to prepare function
             id: nanoid(),
             completed: false,
           },
