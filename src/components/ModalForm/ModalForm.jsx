@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../redux/tasksSlice';
+import { addTask, updateTask } from '../redux/tasksSlice';
+
 import {
   Backdrop,
   ModalContainer,
@@ -14,18 +15,12 @@ import { createPortal } from 'react-dom';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const ModalForm = ({ onClose, initialText }) => {
-  // const [inputData, setInputData] = useState({
-  //   title: '',
-  //   category: '',
-  //   content: '',
-  //   dueDate: new Date().toISOString(),
-  // });
+const ModalForm = ({ onClose, initialText, initialName, initialCategory, task }) => {
 
-  const [name, setName] = useState(initialText);
+  const [name, setName] = useState(initialName);
   const [text, setText] = useState('');
   // const [date, setDate] = useState(new Date().toISOString());
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(initialCategory);
 
   const dispatch = useDispatch();
 
@@ -44,6 +39,12 @@ const ModalForm = ({ onClose, initialText }) => {
   };
 
   useEffect(() => {
+
+    setName(initialName);
+    setText(initialText);
+    setCategory(initialCategory);
+
+
     document.addEventListener('keydown', handleEscapeKey);
     document.addEventListener('click', handleBackdropClick);
 
@@ -52,19 +53,29 @@ const ModalForm = ({ onClose, initialText }) => {
       document.removeEventListener('click', handleBackdropClick);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onClose]);
+  }, [onClose, initialText]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    const text = form.elements.text.value; // Get the task text from the form
-    const name = form.elements.name.value;
-    if (form.elements.text.value?.trim() === '')
-      return alert('fill in the field');
-    dispatch(addTask(text, name, category));
+    const updatedText = form.elements.text.value;
+    const updatedName = form.elements.name.value;
+
+    if (updatedText?.trim() === "") {
+      return alert("fill in the field");
+    }
+
+    if (task) {
+      dispatch(updateTask({ id: task.id, text: updatedText, name: updatedName, category }));
+    } else {
+      dispatch(addTask(updatedText, updatedName, category));
+    }
+
     form.reset();
     onClose();
   };
+
+
 
   return createPortal(
     <>
@@ -103,7 +114,7 @@ const ModalForm = ({ onClose, initialText }) => {
                 <option value="Idea">Idea</option>
               </Select>
             </>
-            <button type="submit">Add task</button>
+            <button type="submit">{task ? 'Edit task' : 'Add task'}</button>
             <button type="button" onClick={onClose}>
               Cancel
             </button>

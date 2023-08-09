@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 import ModalForm from "components/ModalForm/ModalForm";
 
 
-export const TaskForm = () => {
+export const TaskForm = ({task, initialName}) => {
 
   const [showModal, setShowModal] = useState(false);
-  const [taskText, setTaskText] = useState('');
+  const [taskText, setTaskText] = useState(initialName);
 
   const handleAddTask = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ export const TaskForm = () => {
       {/* <button type="submit">Add task</button> */}
       <button type='submit'>Add task</button>
     </form>
-    {showModal && <ModalForm onClose={handleCloseModal} initialText={taskText}/>}
+    {showModal && <ModalForm onClose={handleCloseModal} initialName={taskText} task={task}/>}
     </>
 
   );

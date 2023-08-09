@@ -23,7 +23,8 @@ export const Button = styled.button`
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
-  color: #f44336;
+  /* color: #f44336; */
+  color: #000;
 
   &:hover {
     background-color: #e2e5e8;
