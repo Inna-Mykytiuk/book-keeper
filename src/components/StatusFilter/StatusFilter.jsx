@@ -4,6 +4,9 @@ import { statusFilters } from "components/redux/constants";
 import { getStatusFilter } from "components/redux/selectors";
 import { setStatusFilter } from "../redux/filterSlice";
 
+import { deleteCompleted } from "components/redux/tasksSlice";
+
+
 export const StatusFilter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getStatusFilter);
@@ -29,6 +32,9 @@ export const StatusFilter = () => {
         onClick={() => handleFilterChange(statusFilters.completed)}
       >
         Completed
+      </button>
+      <button onClick={() => dispatch(deleteCompleted())}>
+        Delete completed
       </button>
     </div>
   );
