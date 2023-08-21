@@ -14,3 +14,5 @@ export const getStatusFilter = state => state.filters.status;
 export const selectQuery = state => state.filters.query;
 
 export const selectPage = state => state.filters.page;
+
+export const selectCategory = state => state.filters.category;

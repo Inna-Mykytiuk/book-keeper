@@ -9,6 +9,7 @@ const filtersInitialState = {
   query: '',
   page: START_PAGE,
   limit: LIMIT,
+  category: null,
 };
 
 const filtersSlice = createSlice({
@@ -24,8 +25,11 @@ const filtersSlice = createSlice({
     setPage(state, action) {
       return { ...state, page: action.payload };
     },
+    setCategory(state, action) {
+      state.category = action.payload;
+    },
   },
 });
 
-export const { setStatusFilter, setQuery, setPage } = filtersSlice.actions;
+export const { setStatusFilter, setQuery, setPage, setCategory } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;
